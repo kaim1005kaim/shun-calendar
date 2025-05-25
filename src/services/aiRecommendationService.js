@@ -64,12 +64,13 @@ export const getTimeOfDay = () => {
   return 'dinner';
 };
 
-// 日付ベースの安定した料理選択
+// 日付ベースの安定した料理選択（より多様性を持たせる）
 export const getDateSeed = (date = new Date()) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return year * 10000 + month * 100 + day;
+  // 更にバリエーションを持たせるために異なる乗数を使用
+  return (year * 13 + month * 31 + day * 7) % 999983;
 };
 
 // シード値を基にした擬似ランダム関数
@@ -144,13 +145,21 @@ export const selectTodaysIngredient = (weatherData) => {
   // スコアでソート
   weightedIngredients.sort((a, b) => b.score - a.score);
   
-  // 上位3つから日付ベースで安定選択
-  const topIngredients = weightedIngredients.slice(0, 3);
+  // 日付ベースでより多様な選択を行う
   const seed = getDateSeed();
   const randomValue = seededRandom(seed);
-  const selectedIndex = Math.floor(randomValue * topIngredients.length);
   
-  return topIngredients[selectedIndex] || weightedIngredients[0];
+  // 全食材から選択（重み付けを考慮した確率的選択）
+  const totalScore = weightedIngredients.reduce((sum, item) => sum + item.score, 0);
+  let cumulativeScore = 0;
+  const targetScore = randomValue * totalScore;
+  
+  for (const ingredient of weightedIngredients) {
+    cumulativeScore += ingredient.score;
+    if (cumulativeScore >= targetScore) {
+      return ingredient;
+    }
+  }
 };
 
 // 選択された食材の魅力的な説明をAIが生成する関数
