@@ -1,0 +1,597 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-spinner {
+  text-align: center;
+  color: white;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 今日のヘッダー */
+.today-header {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-section h1 {
+  color: #2c5530;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.today-date {
+  font-size: 2rem;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.time-period {
+  margin-top: 8px;
+}
+
+.time-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.time-indicator.morning {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: #8b5a3c;
+}
+
+.time-indicator.afternoon {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #d35400;
+}
+
+.time-indicator.evening {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.time-indicator.night {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+}
+
+.time-indicator.midnight {
+  background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%);
+  color: white;
+}
+
+.weather-section {
+  text-align: right;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.weather-icon {
+  font-size: 3rem;
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.temperature {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c5530;
+}
+
+.condition {
+  font-size: 1rem;
+  color: #666;
+}
+
+.mock-notice {
+  font-size: 0.8rem;
+  color: #999;
+  font-style: italic;
+}
+
+/* おすすめ料理セクション */
+.recommendation-section {
+  margin-bottom: 40px;
+}
+
+.recommendation-title {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.recommendation-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-5px);
+}
+
+.recommendation-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.recommendation-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 25px;
+  gap: 20px;
+}
+
+.recommendation-thumbnail {
+  font-size: 4rem;
+  min-width: 80px;
+  text-align: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+  border-radius: 15px;
+}
+
+.recommendation-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ingredient-description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.recipe-link-center {
+  display: block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.recipe-link-center:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* 新しいUX: 食材ベース推薦スタイル */
+.featured-ingredient {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+  border-radius: 12px;
+  border-left: 4px solid #4a7c59;
+}
+
+.ingredient-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+  background: #4a7c59;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.ingredient-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c5530;
+  flex: 1;
+}
+
+
+
+/* 詳細天気情報 */
+.weather-details-expanded {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.weather-details-expanded h3 {
+  color: #2c5530;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.weather-item {
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.weather-item:hover {
+  transform: translateY(-2px);
+}
+
+.weather-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.weather-value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c5530;
+}
+
+/* コンテンツセクション */
+.today-content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.section-title {
+  color: #2c5530;
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+  text-align: center;
+  border-bottom: 2px solid #4a7c59;
+  padding-bottom: 10px;
+}
+
+.compact-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.compact-category {
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.compact-category:hover {
+  transform: translateY(-3px);
+}
+
+.compact-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2c5530;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.compact-icon {
+  font-size: 1.6rem;
+}
+
+.compact-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+.compact-grid.expanded {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.compact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.compact-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.compact-item.more-items {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: #666;
+  font-style: italic;
+}
+
+.compact-item.clickable {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.compact-item.clickable:hover {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.compact-item.ingredient-item:hover::after {
+  content: '🔗 レシピを見る';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: #667eea;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.total-count {
+  font-size: 0.9rem;
+  color: #999;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+.compact-thumbnail {
+  font-size: 1.8rem;
+  min-width: 35px;
+  text-align: center;
+}
+
+.compact-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .app {
+    padding: 15px;
+  }
+  
+  .today-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 25px;
+  }
+  
+  .weather-info {
+    justify-content: center;
+  }
+  
+  .weather-details {
+    align-items: center;
+  }
+  
+  .date-section h1 {
+    font-size: 1.8rem;
+  }
+  
+  .today-date {
+    font-size: 1.6rem;
+  }
+  
+  .time-indicator {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+  
+  .weather-icon {
+    font-size: 2.5rem;
+  }
+  
+  .temperature {
+    font-size: 1.8rem;
+  }
+  
+  .recommendation-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    align-items: center;
+  }
+  
+  .recommendation-thumbnail {
+    font-size: 3rem;
+    padding: 12px;
+  }
+  
+  .recommendation-dish {
+    font-size: 1.3rem;
+  }
+  
+  .featured-ingredient {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .ingredient-label {
+    font-size: 0.8rem;
+  }
+  
+  .ingredient-name {
+    font-size: 1rem;
+  }
+  
+  .compact-sections {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .today-content {
+    padding: 20px;
+  }
+  
+  .section-title {
+    font-size: 1.4rem;
+  }
+  
+  .compact-title {
+    font-size: 1.2rem;
+  }
+  
+  .compact-item {
+    padding: 8px;
+    gap: 10px;
+  }
+  
+  .compact-name {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 10px;
+  }
+  
+  .today-header {
+    padding: 20px;
+  }
+  
+  .date-section h1 {
+    font-size: 1.6rem;
+  }
+  
+  .today-date {
+    font-size: 1.4rem;
+  }
+  
+  .time-indicator {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+  
+  .compact-item.ingredient-item:hover::after {
+    display: none; /* モバイルではホバーテキストを非表示 */
+  }
+  
+  .recommendation-title {
+    font-size: 1.5rem;
+  }
+  
+  .recommendation-content {
+    padding: 15px;
+  }
+  
+  .recommendation-dish {
+    font-size: 1.3rem;
+  }
+  
+  .today-content {
+    padding: 15px;
+  }
+  
+  .compact-category {
+    padding: 15px;
+  }
+  
+  .compact-title {
+    font-size: 1.1rem;
+  }
+  
+  .compact-thumbnail {
+    font-size: 1.5rem;
+    min-width: 30px;
+  }
+  
+  .compact-name {
+    font-size: 0.85rem;
+  }
+}
