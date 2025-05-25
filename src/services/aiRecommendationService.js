@@ -53,7 +53,7 @@ import { foodData } from '../data.js';
 import { getCurrentSeason } from './weatherService.js';
 
 const GROQ_API = "https://api.groq.com/openai/v1/chat/completions";
-const GROQ_TOKEN = "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";
+const GROQ_TOKEN = import.meta.env.VITE_GROQ_API_KEY || "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";
 
 // 時間帯を取得
 export const getTimeOfDay = () => {
